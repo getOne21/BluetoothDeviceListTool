@@ -1,6 +1,5 @@
 ﻿using BluetoothDeviceListTool.Services;
 using BluetoothDeviceListTool.Services.Contracts;
-using System.Windows.Input;
 
 namespace BluetoothDeviceListTool.ViewModels;
 
@@ -11,21 +10,18 @@ public partial class MainViewModel : BaseViewModel
     public MainViewModel(IBluetoothDeviceService bluetoothDeviceService)
     {
         this.bluetoothDeviceService = bluetoothDeviceService;
-        this.NearDevicesCommand = new Command(this.GetNearDevices);
     }
-
-    public ICommand NearDevicesCommand { get; }
 
     private string name;
     public string Name
     {
-        get { return name; }
+        get => this.name;
         set
         {
-            if (name != value)
+            if (this.name != value)
             {
-                name = value;
-                OnPropertyChanged();
+                this.name = value;
+                this.OnPropertyChanged();
             }
         }
     }
@@ -33,13 +29,13 @@ public partial class MainViewModel : BaseViewModel
     private string id;
     public string Id
     {
-        get { return id; }
+        get => this.id;
         set
         {
-            if (id != value)
+            if (this.id != value)
             {
-                id = value;
-                OnPropertyChanged();
+                this.id = value;
+                this.OnPropertyChanged();
             }
         }
     }
@@ -47,11 +43,7 @@ public partial class MainViewModel : BaseViewModel
     private ObservableCollection<DeviceInfoDto> devices;
     public ObservableCollection<DeviceInfoDto> Devices
     {
-        get 
-        { 
-            this.GetPairedDevices();
-            return this.devices; 
-        }
+        get => this.devices;
         set
         {
             this.devices = value;
@@ -62,10 +54,7 @@ public partial class MainViewModel : BaseViewModel
     private ObservableCollection<DeviceInfoDto> nearDevices;
     public ObservableCollection<DeviceInfoDto> NearDevices
     {
-        get
-        {
-            return this.nearDevices;
-        }
+        get => this.nearDevices;
         set
         {
             this.nearDevices = value;
@@ -73,15 +62,9 @@ public partial class MainViewModel : BaseViewModel
         }
     }
 
-    private void GetPairedDevices()
+    public void GetPairedDevices()
     {
         var devices = this.bluetoothDeviceService.GetPairedDevices();
-        this.devices = new ObservableCollection<DeviceInfoDto>(devices);
+        this.Devices = new ObservableCollection<DeviceInfoDto>(devices);
     }
-
-    private async void GetNearDevices()
-    {
-        var nearDevices = await this.bluetoothDeviceService.GetNearDevicesAsync();
-        this.NearDevices = new ObservableCollection<DeviceInfoDto>(nearDevices);
-    } 
 }
