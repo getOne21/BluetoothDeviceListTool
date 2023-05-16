@@ -12,8 +12,7 @@
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout>
-                            <Button Text="{Binding Name}"/>
-                            <Label Text="{Binding Id}"/>
+                            <Button Grid.Row="0" Text="{Binding Name}"/>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
