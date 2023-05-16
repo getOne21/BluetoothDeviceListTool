@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:vm="clr-namespace:BluetoothDeviceListTool.ViewModels"
+			 x:Class="BluetoothDeviceListTool.Views.MainPage"
+			 x:DataType="vm:MainViewModel">
+
+    <StackLayout>
+        <Label Text="Paired Devices:" FontSize="30"/>
+        <ListView x:Name="DeviceListView" ItemsSource="{Binding Devices}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout>
+                            <Button Text="{Binding Name}"/>
+                            <Label Text="{Binding Id}"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>
